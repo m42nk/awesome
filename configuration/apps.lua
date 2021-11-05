@@ -41,6 +41,11 @@ return {
 							'/configuration/rofi/global/rofi-spotlight.sh' .. 
 							' -theme ' .. config_dir ..
 							'/configuration/rofi/global/rofi.rasi',
+		rofi_window = 'rofi -dpi ' .. screen.primary.dpi .. 
+							' -show window -modi "Window":' .. config_dir .. 
+							'/configuration/rofi/global/rofi-spotlight.sh' .. 
+							' -theme ' .. config_dir ..
+							'/configuration/rofi/global/rofi.rasi',
 		-- Default app menu
 		rofi_appmenu = 'rofi -dpi ' .. screen.primary.dpi ..
 							' -show drun -theme ' .. config_dir ..
@@ -57,12 +62,13 @@ return {
 		-- Blueman applet
 		'blueman-applet',
 		-- Music server
-		'mpd',
+		-- 'mpd',
 		-- Polkit and keyring
-		'/usr/bin/lxqt-policykit-agent &' ..
-		' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
+		'/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1',
+		-- '/usr/bin/lxqt-policykit-agent &' ..
+		-- ' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)',
 		-- Load X colors
-		'xrdb $HOME/.Xresources',
+		-- 'xrdb $HOME/.Xresources',
 		-- Audio equalizer
 		'pulseeffects --gapplication-service',
 		-- Lockscreen timer

@@ -12,6 +12,15 @@ local apps = require('configuration.apps')
 -- Key bindings
 local global_keys = awful.util.table.join(
 
+	awful.key(
+		{modkey, 'Shift'},
+		'w',
+		function()
+			awful.spawn(apps.default.rofi_window, false)
+		end,
+		{description = 'open window search', group = 'launcher'}
+	),
+
 	-- Hotkeys
 	awful.key(
 		{modkey}, 
@@ -305,7 +314,12 @@ local global_keys = awful.util.table.join(
 		{modkey},
 		'`',
 		function()
-			awesome.emit_signal('module::quake_terminal:toggle')
+			-- awesome.emit_signal('module::quake_terminal:toggle')
+			local focused = awful.screen.focused()
+			local tag = focused.tags[9]
+			if tag then
+				tag:view_only()
+			end
 		end,
 		{description = 'dropdown application', group = 'launcher'}
 	),

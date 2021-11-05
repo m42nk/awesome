@@ -9,7 +9,7 @@ MY_PATH="$(realpath "$0" | xargs dirname)"
 HIST_FILE="${MY_PATH}/history.txt"
 
 OPENER=xdg-open
-TERM_EMU=kitty
+TERM_EMU=alacritty
 TEXT_EDITOR=$EDITOR
 FILE_MANAGER=xdg-open
 BLUETOOTH_SEND=blueman-sendto
@@ -539,7 +539,7 @@ then
 			kill -9 $(pgrep rofi)
 			;;
 		"Edit" )
-			coproc ( eval "${TERM_EMU} ${TEXT_EDITOR} \"$(< ${CURRENT_FILE})\"" & > /dev/null 2>&1 )
+			coproc ( eval "${TERM_EMU} -e ${TEXT_EDITOR} \"$(< ${CURRENT_FILE})\"" & > /dev/null 2>&1 )
 			kill -9 $(pgrep rofi)
 			;;
 		"Move to trash" )

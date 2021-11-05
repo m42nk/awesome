@@ -11,7 +11,8 @@ local clickable_container = require('widget.clickable-container')
 -- Defaults
 naughty.config.defaults.ontop = true
 naughty.config.defaults.icon_size = dpi(32)
-naughty.config.defaults.timeout = 5
+-- naughty.config.defaults.timeout = 5
+naughty.config.defaults.timeout = 3
 naughty.config.defaults.title = 'System Notification'
 naughty.config.defaults.margin = dpi(16)
 naughty.config.defaults.border_width = 0

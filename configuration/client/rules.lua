@@ -163,6 +163,21 @@ ruled.client.connect_signal(
 			}
 		}
 
+		ruled.client.append_rule {
+			id = 'line',
+			rule_any = {
+				instance = {
+					'ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html',
+				},
+				class = {
+					'ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html',
+				}
+			},
+			properties = {
+				tag = '9'
+			}
+		}
+
 		-- Text editors and word processing
 		ruled.client.append_rule {
 			id = 'text',
