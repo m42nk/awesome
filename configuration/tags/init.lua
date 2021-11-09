@@ -9,26 +9,30 @@ local tags = {
 		type = 'terminal',
 		icon = icons.terminal,
 		default_app = apps.default.terminal,
-		gap = beautiful.useless_gap
+		gap = beautiful.useless_gap,
+		text = "geming",
 	},
 	{
 		type = 'internet',
 		icon = icons.web_browser,
 		default_app = apps.default.web_browser,
-		gap = beautiful.useless_gap
+		gap = beautiful.useless_gap,
+		text = 2,
 	},
 	{
 		type = 'code',
 		icon = icons.text_editor,
 		default_app = apps.default.text_editor,
-		gap = beautiful.useless_gap
+		gap = beautiful.useless_gap,
+		text = 3,
 	},
 	{
 		type = 'files',
 		icon = icons.file_manager,
 		default_app = apps.default.file_manager,
 		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.tile
+		layout = awful.layout.suit.tile,
+		text = 4,
 	},
 	{
 		type = 'multimedia',
@@ -36,34 +40,39 @@ local tags = {
 		default_app = apps.default.multimedia,
 		gap = beautiful.useless_gap,
 		layout = awful.layout.suit.floating,
-		gap = 0
+		gap = 0,
+		text = 5,
 	},
 	{
 		type = 'games',
 		icon = icons.games,
 		default_app = apps.default.game,
 		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating
+		layout = awful.layout.suit.floating,
+		text = 6,
 	},
 	{
 		type = 'graphics',
 		icon = icons.graphics,
 		default_app = apps.default.graphics,
-		gap = beautiful.useless_gap
+		gap = beautiful.useless_gap,
+		text = 7,
 	},
 	{
 		type = 'sandbox',
 		icon = icons.sandbox,
 		default_app = apps.default.sandbox,
 		layout = awful.layout.suit.max,
-		gap = 0
+		gap = 0,
+		text = 8,
 	},
 	{
 		type = 'any',
 		icon = icons.development,
 		default_app = apps.default.development,
 		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating
+		layout = awful.layout.suit.floating,
+		text = 9,
 	}
 	-- {
 	--   type = 'social',
@@ -95,7 +104,8 @@ screen.connect_signal(
 				i,
 				{
 					icon = tag.icon,
-					icon_only = true,
+					-- icon_only = true,
+					text = tag.text,
 					layout = tag.layout or awful.layout.suit.spiral.dwindle,
 					gap_single_client = true,
 					gap = tag.gap,
