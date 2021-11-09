@@ -7,6 +7,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
 local widget_icon_dir = config_dir .. '/widget/search-apps/icons/'
 local apps = require('configuration.apps')
+local config = require('configuration.config').bottom_panel
 
 local return_button = function()
 
@@ -23,7 +24,7 @@ local return_button = function()
 	local widget_button = wibox.widget {
 		{
 			widget,
-			margins = dpi(7),
+			margins = dpi(config.widget.inner_margin),
 			widget = wibox.container.margin
 		},
 		widget = clickable_container
