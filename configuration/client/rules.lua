@@ -159,7 +159,26 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = {
-				tag = '2'
+				tag = '2',
+				switch_to_tags = true
+			}
+		}
+
+		-- Browsers and chats
+		ruled.client.append_rule {
+			id = 'database-api',
+			rule_any = {
+				class = {
+					'jetbrains-datagrip',
+					'postman',
+					'Postman',
+					'beekeeper-studio',
+					'antares',
+				}
+			},
+			properties = {
+				tag = '3',
+				switch_to_tags = true
 			}
 		}
 
@@ -174,7 +193,8 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = {
-				tag = '9'
+				tag = '9',
+				switch_to_tags = true
 			}
 		}
 
@@ -326,11 +346,13 @@ ruled.client.connect_signal(
 			id       = 'floating',
 			rule_any = {
 				instance    = {
+					'zoom',
 					'file_progress',
 					'Popup',
 					'nm-connection-editor',
 				},
 				class = {
+					'zoom',
 					'scrcpy',
 					'Mugshot',
 					'Pulseeffects'
