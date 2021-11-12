@@ -137,7 +137,8 @@ local awesome_overrides = function(theme)
 	theme.border_radius = dpi(9)
 
 	-- Decorations
-	theme.useless_gap = dpi(4)
+	-- theme.useless_gap = dpi(4)
+	theme.useless_gap = dpi(3)
 	theme.client_shape_rectangle = gears.shape.rectangle
 	theme.client_shape_rounded = function(cr, width, height)
 		gears.shape.rounded_rect(cr, width, height, dpi(9))

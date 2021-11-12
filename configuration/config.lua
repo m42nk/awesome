@@ -53,8 +53,8 @@ return {
 	module = {
 		auto_start = {
 			-- Will create notification if true
-			-- debug_mode = false
-			debug_mode = true
+			debug_mode = false
+			-- debug_mode = true
 		},
 
 		dynamic_wallpaper = {

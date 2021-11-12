@@ -13,7 +13,7 @@ local apps = require('configuration.apps')
 local global_keys = awful.util.table.join(
 
 	awful.key(
-		{modkey, 'Shift'},
+		{modkey},
 		'w',
 		function()
 			awful.spawn(apps.default.rofi_window, false)
@@ -121,13 +121,13 @@ local global_keys = awful.util.table.join(
 		{description = 'decrease gap', group = 'layout'}
 	),
 	awful.key(
-		{modkey}, 
+		{modkey, 'Shift'}, 
 		'w', 
 		awful.tag.viewprev, 
 		{description = 'view previous tag', group = 'tag'}
 	),
 	awful.key(
-		{modkey}, 
+		{modkey, 'Shift'},
 		's', 
 		awful.tag.viewnext, 
 		{description = 'view next tag', group = 'tag'}
@@ -403,14 +403,14 @@ local global_keys = awful.util.table.join(
 		end,
 		{description = 'open default terminal', group = 'launcher'}
 	),
-	awful.key(
-		{modkey, 'Shift'}, 
-		'e',
-		function()
-			awful.spawn(apps.default.file_manager)
-		end,
-		{description = 'open default file manager', group = 'launcher'}
-	),
+	-- awful.key(
+	-- 	{modkey, 'Shift'}, 
+	-- 	'e',
+	-- 	function()
+	-- 		awful.spawn(apps.default.file_manager)
+	-- 	end,
+	-- 	{description = 'open default file manager', group = 'launcher'}
+	-- ),
 	awful.key(
 		{modkey, 'Shift'}, 
 		'f',
@@ -429,7 +429,8 @@ local global_keys = awful.util.table.join(
 	),
 	awful.key(
 		{modkey}, 
-		'e',
+		-- 'e',
+		'm',
 		function()
 			local focused = awful.screen.focused()
 

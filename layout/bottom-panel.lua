@@ -14,17 +14,21 @@ local bottom_panel = function(s)
 		ontop = true,
 		screen = s,
 		type = 'dock',
-		height = dpi(48),
+		-- height = dpi(48),
+		height = dpi(26),
 		width = s.geometry.width,
 		x = s.geometry.x,
-		y = dpi(s.geometry.height - 48),
+		-- y = dpi(s.geometry.height - 48),
+		y = dpi(s.geometry.height - 26),
 		stretch = true,
-		bg = beautiful.background,
+		-- bg = beautiful.background,
+		bg = "#FFFFFF00",
 		fg = beautiful.fg_normal
 	}
 
 	panel:struts {
-		bottom = dpi(48)
+		-- bottom = dpi(48)
+		bottom = dpi(26)
 	}
 
 	panel:connect_signal(
@@ -45,12 +49,13 @@ local bottom_panel = function(s)
         		border_color = beautiful.groups_title_bg,
 				bg = beautiful.transparent,
 				shape = function(cr, w, h)
-					gears.shape.rounded_rect(cr, w, h, dpi(12))
+					-- gears.shape.rounded_rect(cr, w, h, dpi(12))
+					gears.shape.rounded_rect(cr, w, h, dpi(8))
 				end,
 				widget = wibox.container.background
 			},
-			top = dpi(9),
-			bottom = dpi(9),
+			-- top = dpi(9),
+			-- bottom = dpi(9),
 			widget = wibox.container.margin
 		}
 	end
@@ -123,6 +128,5 @@ local bottom_panel = function(s)
 
 	return panel
 end
-
 
 return bottom_panel

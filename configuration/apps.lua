@@ -93,6 +93,7 @@ return {
 		"remaps",
 		"switchdisplay-quiet",
 		"pulseaudio",
+		"keynav --daemonize",
 	},
 
 	-- List of binaries/shell scripts that will execute for a certain task
