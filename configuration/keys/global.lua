@@ -14,6 +14,15 @@ local global_keys = awful.util.table.join(
 
 	awful.key(
 		{modkey},
+		'e',
+		function()
+			awful.spawn("rofi -show run", false)
+		end,
+		{description = 'open window search', group = 'launcher'}
+	),
+
+	awful.key(
+		{modkey},
 		'w',
 		function()
 			awful.spawn(apps.default.rofi_window, false)
