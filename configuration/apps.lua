@@ -1,6 +1,7 @@
 local filesystem = require("gears.filesystem")
 local config_dir = filesystem.get_configuration_dir()
 local utils_dir = config_dir .. "utilities/"
+local screen = screen
 
 return {
 	-- The default applications that we will use in keybindings and widgets
@@ -47,16 +48,17 @@ return {
 		rofi_window = "rofi -dpi "
 			.. screen.primary.dpi
 			.. " -show combi"
-			.. " -combi-modi Brotab:rofi-brotab,window"
-			.. " -theme "
-			.. config_dir
-			.. "/configuration/rofi/global/rofi.rasi",
+			.. " -combi-modi Brotab:rofi-brotab,window",
+			-- .. " -theme "
+			-- .. config_dir
+			-- .. "/configuration/rofi/global/rofi.rasi",
 		-- Default app menu
 		rofi_appmenu = "rofi -dpi "
 			.. screen.primary.dpi
-			.. " -show drun -theme "
-			.. config_dir
-			.. "/configuration/rofi/appmenu/rofi.rasi",
+			.. " -show drun",
+			-- .. " -theme "
+			-- .. config_dir
+			-- .. "/configuration/rofi/appmenu/rofi.rasi",
 
 		-- You can add more default applications here
 	},
@@ -67,7 +69,7 @@ return {
 		"picom -b --experimental-backends --dbus --config " .. config_dir .. "/configuration/picom.conf",
 
 		-- Blueman applet
-		"blueman-applet",
+		-- "blueman-applet",
 
 		-- Music server
 		-- 'mpd',
@@ -93,6 +95,7 @@ return {
 		"remaps",
 		"switchdisplay-quiet",
 		"pulseaudio",
+		"keynav --daemonize",
 	},
 
 	-- List of binaries/shell scripts that will execute for a certain task

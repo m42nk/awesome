@@ -8,26 +8,27 @@ local clickable_container = require('widget.clickable-container')
 local task_list = require('widget.task-list')
 local tag_list = require('widget.tag-list')
 
--- destructure table and expose all the keys
-local config = require('configuration.config').bottom_panel
-
 local bottom_panel = function(s)
 
 	local panel = wibox {
 		ontop = true,
 		screen = s,
 		type = 'dock',
-		height = dpi(config.panel.height),
+		-- height = dpi(48),
+		height = dpi(26),
 		width = s.geometry.width,
 		x = s.geometry.x,
-		y = dpi(s.geometry.height - config.panel.height),
+		-- y = dpi(s.geometry.height - 48),
+		y = dpi(s.geometry.height - 26),
 		stretch = true,
-		bg = beautiful.background,
+		-- bg = beautiful.background,
+		bg = "#FFFFFF00",
 		fg = beautiful.fg_normal
 	}
 
 	panel:struts {
-		bottom = dpi(config.panel.height)
+		-- bottom = dpi(48)
+		bottom = dpi(26)
 	}
 
 	panel:connect_signal(
@@ -40,21 +41,21 @@ local bottom_panel = function(s)
 		end
 	)
 
-	local build_widget = function(widget, border)
-		border = border or false
+	local build_widget = function(widget)
 		return wibox.widget {
 			{
 				widget,
-				border_width = border and 0 or dpi(1),
+				border_width = dpi(1),
         		border_color = beautiful.groups_title_bg,
 				bg = beautiful.transparent,
 				shape = function(cr, w, h)
-					gears.shape.rounded_rect(cr, w, h, dpi(config.rounded))
+					-- gears.shape.rounded_rect(cr, w, h, dpi(12))
+					gears.shape.rounded_rect(cr, w, h, dpi(8))
 				end,
 				widget = wibox.container.background
 			},
-			top = dpi(config.widget.margin_top),
-			bottom = dpi(config.widget.margin_bottom),
+			-- top = dpi(9),
+			-- bottom = dpi(9),
 			widget = wibox.container.margin
 		}
 	end
@@ -67,7 +68,7 @@ local bottom_panel = function(s)
 			widget = wibox.widget.systray
 		},
 		visible = false,
-		top = dpi(2),
+		top = dpi(10),
 		widget = wibox.container.margin
 	}
 
@@ -92,7 +93,7 @@ local bottom_panel = function(s)
 			expand = 'none',
 			{
 				layout = wibox.layout.fixed.horizontal,
-				spacing = dpi(config.spacing),
+				spacing = dpi(5),
 				s.search_apps,
 				s.control_center_toggle,
 				s.global_search,
@@ -127,6 +128,5 @@ local bottom_panel = function(s)
 
 	return panel
 end
-
 
 return bottom_panel

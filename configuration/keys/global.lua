@@ -5,80 +5,106 @@ require("awful.autofocus")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
-local super = require("configuration.keys.mod").mod_key
-local alt = require("configuration.keys.mod").alt_key
+local modkey = require("configuration.keys.mod").mod_key
+local altkey = require("configuration.keys.mod").alt_key
 local apps = require("configuration.apps")
-
-local utils = require("configuration.keys.utils")
-local spawn = utils.spawn
-local info = utils.info
 
 -- Key bindings
 local global_keys = awful.util.table.join(
+	awful.key({ modkey }, "o", function()
+		awful.screen.focus_relative(1)
+	end),
+	awful.key({ modkey }, "e", function()
+		awful.spawn("rofi -show run", false)
+	end, {
+		description = "open window search",
+		group = "launcher",
+	}),
 
-	awful.key({ super, "Shift" }, "w", spawn(apps.default.rofi_window, false), info("open window search", "launcher")),
+	awful.key({ modkey }, "w", function()
+		awful.spawn(apps.default.rofi_window, false)
+	end, {
+		description = "open window search",
+		group = "launcher",
+	}),
 
 	-- Hotkeys
-	awful.key({ super }, "F1", hotkeys_popup.show_help, info("show help", "awesome")),
-	awful.key({ super, "Control" }, "r", awesome.restart, info("reload awesome", "awesome")),
+	awful.key({ modkey }, "F1", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
-	awful.key({ super, "Control", "Shift" }, "q", awesome.quit, info("quit awesome", "awesome")),
+	awful.key({ modkey, "Control", "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
-	awful.key({ alt, "Shift" }, "l", function()
+	awful.key({ altkey, "Shift" }, "l", function()
 		awful.tag.incmwfact(0.05)
-	end, info(
-		"increase master width factor",
-		"layout"
-	)),
-	awful.key({ alt, "Shift" }, "h", function()
+	end, {
+		description = "increase master width factor",
+		group = "layout",
+	}),
+	awful.key({ altkey, "Shift" }, "h", function()
 		awful.tag.incmwfact(-0.05)
-	end, info(
-		"decrease master width factor",
-		"layout"
-	)),
-	awful.key({ super, "Shift" }, "h", function()
+	end, {
+		description = "decrease master width factor",
+		group = "layout",
+	}),
+	awful.key({ modkey, "Shift" }, "h", function()
 		awful.tag.incnmaster(1, nil, true)
-	end, info(
-		"increase the number of master clients",
-		"layout"
-	)),
-	awful.key({ super, "Shift" }, "l", function()
+	end, {
+		description = "increase the number of master clients",
+		group = "layout",
+	}),
+	awful.key({ modkey, "Shift" }, "l", function()
 		awful.tag.incnmaster(-1, nil, true)
-	end, info(
-		"decrease the number of master clients",
-		"layout"
-	)),
-	awful.key({ super, "Control" }, "h", function()
+	end, {
+		description = "decrease the number of master clients",
+		group = "layout",
+	}),
+	awful.key({ modkey, "Control" }, "h", function()
 		awful.tag.incncol(1, nil, true)
-	end, info(
-		"increase the number of columns",
-		"layout"
-	)),
-	awful.key({ super, "Control" }, "l", function()
+	end, {
+		description = "increase the number of columns",
+		group = "layout",
+	}),
+	awful.key({ modkey, "Control" }, "l", function()
 		awful.tag.incncol(-1, nil, true)
-	end, info(
-		"decrease the number of columns",
-		"layout"
-	)),
-	awful.key({ super }, "space", function()
+	end, {
+		description = "decrease the number of columns",
+		group = "layout",
+	}),
+	awful.key({ modkey }, "space", function()
 		awful.layout.inc(1)
-	end, info("select next layout", "layout")),
-	awful.key({ super, "Shift" }, "space", function()
+	end, {
+		description = "select next layout",
+		group = "layout",
+	}),
+	awful.key({ modkey, "Shift" }, "space", function()
 		awful.layout.inc(-1)
-	end, info(
-		"select previous layout",
-		"layout"
-	)),
-	awful.key({ super }, "o", function()
+	end, {
+		description = "select previous layout",
+		group = "layout",
+	}),
+	awful.key({ modkey }, "g", function()
 		awful.tag.incgap(1)
-	end, info("increase gap", "layout")),
-	awful.key({ super, "Shift" }, "o", function()
+	end, { description = "increase gap", group = "layout" }),
+	awful.key({ modkey, "Shift" }, "g", function()
 		awful.tag.incgap(-1)
-	end, info("decrease gap", "layout")),
-	awful.key({ super }, "w", awful.tag.viewprev, info("view previous tag", "tag")),
-	awful.key({ super }, "s", awful.tag.viewnext, info("view next tag", "tag")),
-	awful.key({ super }, "Escape", awful.tag.history.restore, info("alternate between current and previous tag", "tag")),
-	awful.key({ super, "Control" }, "w", function()
+	end, {
+		description = "decrease gap",
+		group = "layout",
+	}),
+	awful.key(
+		{ modkey, "Shift", "Ctrl" },
+		"w",
+		awful.tag.viewprev,
+		{ description = "view previous tag", group = "tag" }
+	),
+	awful.key({ modkey, "Shift", "Ctrl" }, "s", awful.tag.viewnext, { description = "view next tag", group = "tag" }),
+	awful.key(
+		{ modkey },
+		"Tab",
+		awful.tag.history.restore,
+		{ description = "alternate between current and previous tag", group = "tag" }
+	),
+	awful.key({ modkey, "Control" }, "w", function()
 		-- tag_view_nonempty(-1)
 		local focused = awful.screen.focused()
 		for i = 1, #focused.tags do
@@ -87,11 +113,11 @@ local global_keys = awful.util.table.join(
 				return
 			end
 		end
-	end, info(
-		"view previous non-empty tag",
-		"tag"
-	)),
-	awful.key({ super, "Control" }, "s", function()
+	end, {
+		description = "view previous non-empty tag",
+		group = "tag",
+	}),
+	awful.key({ modkey, "Control" }, "s", function()
 		-- tag_view_nonempty(1)
 		local focused = awful.screen.focused()
 		for i = 1, #focused.tags do
@@ -100,135 +126,157 @@ local global_keys = awful.util.table.join(
 				return
 			end
 		end
-	end, info(
-		"view next non-empty tag",
-		"tag"
-	)),
-	awful.key({ super, "Shift" }, "F1", function()
+	end, {
+		description = "view next non-empty tag",
+		group = "tag",
+	}),
+	awful.key({ modkey, "Shift" }, "F1", function()
 		awful.screen.focus_relative(-1)
-	end, info(
-		"focus the previous screen",
-		"screen"
-	)),
-	awful.key({ super, "Shift" }, "F2", function()
+	end, {
+		description = "focus the previous screen",
+		group = "screen",
+	}),
+	awful.key({ modkey, "Shift" }, "F2", function()
 		awful.screen.focus_relative(1)
-	end, info(
-		"focus the next screen",
-		"screen"
-	)),
-	awful.key({ super, "Control" }, "n", function()
+	end, {
+		description = "focus the next screen",
+		group = "screen",
+	}),
+	awful.key({ modkey, "Control" }, "n", function()
 		local c = awful.client.restore()
 		-- Focus restored client
 		if c then
 			c:emit_signal("request::activate")
 			c:raise()
 		end
-	end, info(
-		"restore minimized",
-		"screen"
-	)),
+	end, {
+		description = "restore minimized",
+		group = "screen",
+	}),
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn("light -A 10", false)
 		awesome.emit_signal("widget::brightness")
 		awesome.emit_signal("module::brightness_osd:show", true)
-	end, info(
-		"increase brightness by 10%",
-		"hotkeys"
-	)),
+	end, {
+		description = "increase brightness by 10%",
+		group = "hotkeys",
+	}),
 	awful.key({}, "XF86MonBrightnessDown", function()
 		awful.spawn("light -U 10", false)
 		awesome.emit_signal("widget::brightness")
 		awesome.emit_signal("module::brightness_osd:show", true)
-	end, info(
-		"decrease brightness by 10%",
-		"hotkeys"
-	)),
+	end, {
+		description = "decrease brightness by 10%",
+		group = "hotkeys",
+	}),
 	-- ALSA volume control
 	awful.key({}, "XF86AudioRaiseVolume", function()
 		awful.spawn("amixer -D pulse sset Master 5%+", false)
 		awesome.emit_signal("widget::volume")
 		awesome.emit_signal("module::volume_osd:show", true)
-	end, info(
-		"increase volume up by 5%",
-		"hotkeys"
-	)),
+	end, {
+		description = "increase volume up by 5%",
+		group = "hotkeys",
+	}),
 	awful.key({}, "XF86AudioLowerVolume", function()
 		awful.spawn("amixer -D pulse sset Master 5%-", false)
 		awesome.emit_signal("widget::volume")
 		awesome.emit_signal("module::volume_osd:show", true)
-	end, info(
-		"decrease volume up by 5%",
-		"hotkeys"
-	)),
-	awful.key({}, "XF86AudioMute", spawn("amixer -D pulse set Master 1+ toggle", false), info("toggle mute", "hotkeys")),
-	awful.key({}, "XF86AudioNext", spawn("mpc next", false), info("next music", "hotkeys")),
-	awful.key({}, "XF86AudioPrev", spawn("mpc prev", false), info("previous music", "hotkeys")),
-	awful.key({}, "XF86AudioPlay", spawn("mpc toggle", false), info("play/pause music", "hotkeys")),
-	awful.key({}, "XF86AudioMicMute", spawn("amixer set Capture toggle", false), info("mute microphone", "hotkeys")),
+	end, {
+		description = "decrease volume up by 5%",
+		group = "hotkeys",
+	}),
+	awful.key({}, "XF86AudioMute", function()
+		awful.spawn("amixer -D pulse set Master 1+ toggle", false)
+	end, {
+		description = "toggle mute",
+		group = "hotkeys",
+	}),
+	awful.key({}, "XF86AudioNext", function()
+		awful.spawn("mpc next", false)
+	end, {
+		description = "next music",
+		group = "hotkeys",
+	}),
+	awful.key({}, "XF86AudioPrev", function()
+		awful.spawn("mpc prev", false)
+	end, {
+		description = "previous music",
+		group = "hotkeys",
+	}),
+	awful.key({}, "XF86AudioPlay", function()
+		awful.spawn("mpc toggle", false)
+	end, {
+		description = "play/pause music",
+		group = "hotkeys",
+	}
+),
+	awful.key({}, "XF86AudioMicMute", function()
+		awful.spawn("amixer set Capture toggle", false)
+	end, {
+		description = "mute microphone",
+		group = "hotkeys",
+	}),
+	awful.key({}, "XF86PowerDown", function()
+		--
+	end, { description = "shutdown skynet", group = "hotkeys" }),
 	awful.key({}, "XF86PowerOff", function()
 		awesome.emit_signal("module::exit_screen:show")
-	end, info(
-		"toggle exit screen",
-		"hotkeys"
-	)),
+	end, {
+		description = "toggle exit screen",
+		group = "hotkeys",
+	}),
 	awful.key({}, "XF86Display", function()
 		awful.spawn.single_instance("arandr", false)
-	end, info(
-		"arandr",
-		"hotkeys"
-	)),
-	awful.key({ super, "Ctrl" }, "q", function()
-		awesome.emit_signal("module::exit_screen:show")
-	end, info(
-		"toggle exit screen",
-		"hotkeys"
-	)),
-	awful.key({ super }, "`", function()
-		local focused = awful.screen.focused()
-		local tag = focused.tags[9]
-		if tag then
-			tag:view_only()
-		end
-	end, info(
-		"dropdown application",
-		"launcher"
-	)),
+	end, {
+		description = "arandr",
+		group = "hotkeys",
+	}),
+	awful.key(
+		-- {modkey, 'Shift'},
+		{ modkey, "Ctrl" },
+		"q",
+		function()
+			awesome.emit_signal("module::exit_screen:show")
+		end,
+		{ description = "toggle exit screen", group = "hotkeys" }
+	),
 	awful.key({}, "Print", function()
 		awful.spawn.easy_async_with_shell(apps.utils.full_screenshot, function() end)
-	end, info(
-		"fullscreen screenshot",
-		"Utility"
-	)),
-	awful.key({ super, "Shift" }, "s", function()
+	end, {
+		description = "fullscreen screenshot",
+		group = "Utility",
+	}),
+	awful.key({ modkey, "Shift" }, "s", function()
 		awful.spawn.easy_async_with_shell(apps.utils.area_screenshot, function() end)
-	end, info(
-		"area/selected screenshot",
-		"Utility"
-	)),
-	awful.key({ super }, "x", function()
+	end, {
+		description = "area/selected screenshot",
+		group = "Utility",
+	}),
+	awful.key({ modkey }, "x", function()
 		awesome.emit_signal("widget::blur:toggle")
-	end, info(
-		"toggle blur effects",
-		"Utility"
-	)),
-	awful.key({ super }, "]", function()
+	end, {
+		description = "toggle blur effects",
+		group = "Utility",
+	}),
+	awful.key({ modkey }, "]", function()
 		awesome.emit_signal("widget::blur:increase")
-	end, info(
-		"increase blur effect by 10%",
-		"Utility"
-	)),
-	awful.key({ super }, "[", function()
+	end, {
+		description = "increase blur effect by 10%",
+		group = "Utility",
+	}),
+	awful.key({ modkey }, "[", function()
 		awesome.emit_signal("widget::blur:decrease")
-	end, info(
-		"decrease blur effect by 10%",
-		"Utility"
-	)),
-	awful.key({ super }, "t", function()
+	end, {
+		description = "decrease blur effect by 10%",
+		group = "Utility",
+	}),
+	awful.key({ modkey }, "t", function()
 		awesome.emit_signal("widget::blue_light:toggle")
-	end, info(
-		"toggle redshift filter",
-		"Utility"
-	)),
+	end, {
+		description = "toggle redshift filter",
+		group = "Utility",
+	}),
 	awful.key({ "Control" }, "Escape", function()
 		if screen.primary.systray then
 			if not screen.primary.tray_toggler then
@@ -238,10 +286,10 @@ local global_keys = awful.util.table.join(
 				awesome.emit_signal("widget::systray:toggle")
 			end
 		end
-	end, info(
-		"toggle systray visibility",
-		"Utility"
-	)),
+	end, {
+		description = "toggle systray visibility",
+		group = "Utility",
+	}),
 	-- awful.key(
 	-- 	{modkey},
 	-- 	'l',
@@ -250,36 +298,52 @@ local global_keys = awful.util.table.join(
 	-- 	end,
 	-- 	{description = 'lock the screen', group = 'Utility'}
 	-- ),
+	awful.key({ modkey }, "Return", function()
+		-- awful.spawn(apps.default.terminal)
+		awful.spawn(apps.default.terminal .. " -e tmux")
+	end, {
+		description = "open default terminal",
+		group = "launcher",
+	}),
+	-- awful.key(
+	-- 	{modkey, 'Shift'},
+	-- 	'e',
+	-- 	function()
+	-- 		awful.spawn(apps.default.file_manager)
+	-- 	end,
+	-- 	{description = 'open default file manager', group = 'launcher'}
+	-- ),
+	awful.key({ modkey, "Shift" }, "f", function()
+		awful.spawn(apps.default.web_browser)
+	end, {
+		description = "open default web browser",
+		group = "launcher",
+	}),
+	awful.key({ "Control", "Shift" }, "Escape", function()
+		awful.spawn(apps.default.terminal .. " -e " .. "htop")
+	end, {
+		description = "open system monitor",
+		group = "launcher",
+	}),
 	awful.key(
-		{ super },
-		"Return",
-		spawn(apps.default.terminal .. " -e tmux"),
-		info("open default terminal", "launcher")
-	),
-	awful.key({ super, "Shift" }, "e", spawn(apps.default.file_manager), info("open default file manager", "launcher")),
-	awful.key({ super, "Shift" }, "f", spawn(apps.default.web_browser), info("open default web browser", "launcher")),
-	awful.key(
-		{ "Control", "Shift" },
-		"Escape",
-		spawn(apps.default.terminal .. " " .. "htop"),
-		info("open system monitor", "launcher")
-	),
-	awful.key({ super }, "e", function()
-		local focused = awful.screen.focused()
+		{ modkey },
+		-- 'e',
+		"m",
+		function()
+			local focused = awful.screen.focused()
 
-		if focused.control_center then
-			focused.control_center:hide_dashboard()
-			focused.control_center.opened = false
-		end
-		if focused.info_center then
-			focused.info_center:hide_dashboard()
-			focused.info_center.opened = false
-		end
-		awful.spawn(apps.default.rofi_appmenu, false)
-	end, info(
-		"open application drawer",
-		"launcher"
-	)),
+			if focused.control_center then
+				focused.control_center:hide_dashboard()
+				focused.control_center.opened = false
+			end
+			if focused.info_center then
+				focused.info_center:hide_dashboard()
+				focused.info_center.opened = false
+			end
+			awful.spawn(apps.default.rofi_appmenu, false)
+		end,
+		{ description = "open application drawer", group = "launcher" }
+	),
 	awful.key({}, "XF86Launch1", function()
 		local focused = awful.screen.focused()
 
@@ -292,31 +356,36 @@ local global_keys = awful.util.table.join(
 			focused.info_center.opened = false
 		end
 		awful.spawn(apps.default.rofi_appmenu, false)
-	end, info(
-		"open application drawer",
-		"launcher"
-	)),
-	awful.key({ super, "Shift" }, "x", spawn(apps.default.rofi_global, false), info("open global search", "launcher")),
-	awful.key({ super }, "r", function()
+	end, {
+		description = "open application drawer",
+		group = "launcher",
+	}),
+	awful.key({ modkey, "Shift" }, "x", function()
+		awful.spawn(apps.default.rofi_global, false)
+	end, {
+		description = "open global search",
+		group = "launcher",
+	}),
+	awful.key({ modkey }, "r", function()
 		local focused = awful.screen.focused()
 		if focused.info_center and focused.info_center.visible then
 			focused.info_center:toggle()
 		end
 		focused.control_center:toggle()
-	end, info(
-		"open control center",
-		"launcher"
-	)),
-	awful.key({ super, "Shift" }, "r", function()
+	end, {
+		description = "open control center",
+		group = "launcher",
+	}),
+	awful.key({ modkey, "Shift" }, "r", function()
 		local focused = awful.screen.focused()
 		if focused.control_center and focused.control_center.visible then
 			focused.control_center:toggle()
 		end
 		focused.info_center:toggle()
-	end, info(
-		"open info center",
-		"launcher"
-	))
+	end, {
+		description = "open info center",
+		group = "launcher",
+	})
 )
 
 -- Bind all key numbers to tags.
@@ -326,15 +395,15 @@ for i = 1, 9 do
 	-- Hack to only show tags 1 and 9 in the shortcut window (mod+s)
 	local descr_view, descr_toggle, descr_move, descr_toggle_focus
 	if i == 1 or i == 9 then
-		descr_view = info("view tag #", "tag")
-		descr_toggle = info("toggle tag #", "tag")
-		descr_move = info("move focused client to tag #", "tag")
-		descr_toggle_focus = info("toggle focused client on tag #", "tag")
+		descr_view = { description = "view tag #", group = "tag" }
+		descr_toggle = { description = "toggle tag #", group = "tag" }
+		descr_move = { description = "move focused client to tag #", group = "tag" }
+		descr_toggle_focus = { description = "toggle focused client on tag #", group = "tag" }
 	end
 	global_keys = awful.util.table.join(
 		global_keys,
 		-- View tag only.
-		awful.key({ super }, "#" .. i + 9, function()
+		awful.key({ modkey }, "#" .. i + 9, function()
 			local focused = awful.screen.focused()
 			local tag = focused.tags[i]
 			if tag then
@@ -342,7 +411,7 @@ for i = 1, 9 do
 			end
 		end, descr_view),
 		-- Toggle tag display.
-		awful.key({ super, "Control" }, "#" .. i + 9, function()
+		awful.key({ modkey, "Control" }, "#" .. i + 9, function()
 			local focused = awful.screen.focused()
 			local tag = focused.tags[i]
 			if tag then
@@ -350,7 +419,7 @@ for i = 1, 9 do
 			end
 		end, descr_toggle),
 		-- Move client to tag.
-		awful.key({ super, "Shift" }, "#" .. i + 9, function()
+		awful.key({ modkey, "Shift" }, "#" .. i + 9, function()
 			if client.focus then
 				local tag = client.focus.screen.tags[i]
 				if tag then
@@ -359,7 +428,7 @@ for i = 1, 9 do
 			end
 		end, descr_move),
 		-- Toggle tag on focused client.
-		awful.key({ super, "Control", "Shift" }, "#" .. i + 9, function()
+		awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9, function()
 			if client.focus then
 				local tag = client.focus.screen.tags[i]
 				if tag then
@@ -369,5 +438,16 @@ for i = 1, 9 do
 		end, descr_toggle_focus)
 	)
 end
+
+global_keys = awful.util.table.join(
+	global_keys,
+	awful.key({ modkey }, "`", function()
+		local focused = awful.screen.focused()
+		local tag = focused.tags[9]
+		if tag then
+			tag:view_only()
+		end
+	end)
+)
 
 return global_keys
