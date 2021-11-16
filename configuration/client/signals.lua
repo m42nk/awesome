@@ -1,6 +1,8 @@
 local awful = require('awful')
 local gears = require('gears')
 local beautiful = require('beautiful')
+local client = client
+local awesome = awesome
 
 local update_client = function(c)
 	-- Set client's shape based on its tag's layout and status (floating, maximized, etc.)

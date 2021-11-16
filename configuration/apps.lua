@@ -1,6 +1,7 @@
 local filesystem = require("gears.filesystem")
 local config_dir = filesystem.get_configuration_dir()
 local utils_dir = config_dir .. "utilities/"
+local screen = screen
 
 return {
 	-- The default applications that we will use in keybindings and widgets
