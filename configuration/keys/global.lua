@@ -84,7 +84,10 @@ local global_keys = awful.util.table.join(
 	}),
 	awful.key({ modkey }, "g", function()
 		awful.tag.incgap(1)
-	end, { description = "increase gap", group = "layout" }),
+	end, {
+		description = "increase gap",
+		group = "layout",
+	}),
 	awful.key({ modkey, "Shift" }, "g", function()
 		awful.tag.incgap(-1)
 	end, {
@@ -209,8 +212,7 @@ local global_keys = awful.util.table.join(
 	end, {
 		description = "play/pause music",
 		group = "hotkeys",
-	}
-),
+	}),
 	awful.key({}, "XF86AudioMicMute", function()
 		awful.spawn("amixer set Capture toggle", false)
 	end, {
@@ -300,7 +302,8 @@ local global_keys = awful.util.table.join(
 	-- ),
 	awful.key({ modkey }, "Return", function()
 		-- awful.spawn(apps.default.terminal)
-		awful.spawn(apps.default.terminal .. " -e tmux")
+		-- awful.spawn(apps.default.terminal .. " -e tmux")
+		awful.spawn(apps.default.terminal .. " tmux")
 	end, {
 		description = "open default terminal",
 		group = "launcher",
@@ -320,7 +323,8 @@ local global_keys = awful.util.table.join(
 		group = "launcher",
 	}),
 	awful.key({ "Control", "Shift" }, "Escape", function()
-		awful.spawn(apps.default.terminal .. " -e " .. "htop")
+		-- awful.spawn(apps.default.terminal .. " -e " .. "htop")
+		awful.spawn(apps.default.terminal .. " " .. "htop")
 	end, {
 		description = "open system monitor",
 		group = "launcher",
@@ -449,5 +453,14 @@ global_keys = awful.util.table.join(
 		end
 	end)
 )
+
+require("awesomewm-vim-tmux-navigator")({
+	up = { "k" },
+	down = { "j" },
+	left = { "h" },
+	right = { "l" },
+	mod = modkey,
+	mod_keysym = "Super_L",
+})
 
 return global_keys

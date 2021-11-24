@@ -7,11 +7,12 @@ return {
 	-- The default applications that we will use in keybindings and widgets
 	default = {
 		-- Default terminal emulator
-		terminal = "alacritty",
+		terminal = "kitty",
 		-- Default web browser
 		web_browser = "firefox",
 		-- Default text editor
-		text_editor = "alacritty -e lvim",
+		-- text_editor = "alacritty -e lvim",
+		text_editor = "kitty lvim",
 		-- Default file manager
 		file_manager = "thunar",
 		-- Default media player
@@ -23,9 +24,11 @@ return {
 		-- Default sandbox
 		sandbox = "virtualbox",
 		-- Default IDE
-		development = "alacritty -e lvim",
+		-- development = "alacritty -e lvim",
+		development = "kitty lvim",
 		-- Default network manager
-		network_manager = "alacritty -e nmtui",
+		-- network_manager = "alacritty -e nmtui",
+		network_manager = "kitty nmtui",
 		-- Default bluetooth manager
 		bluetooth_manager = "blueman-manager",
 		-- Default power manager

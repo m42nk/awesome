@@ -13,7 +13,8 @@ local terminal = apps.default.terminal
 local web_browser = apps.default.web_browser
 local file_manager = apps.default.file_manager
 local text_editor = apps.default.text_editor
-local editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'nano')
+-- local editor_cmd = terminal .. ' -e ' .. (os.getenv('EDITOR') or 'nano')
+local editor_cmd = terminal .. ' ' .. (os.getenv('EDITOR') or 'nano')
 
 --[[
 

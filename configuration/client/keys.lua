@@ -39,18 +39,18 @@ local client_keys = awful.util.table.join(
 	end, { description = "close", group = "client" }),
 
 	-- move by direction
-	awful.key({ modkey }, "h", function()
-		awful.client.focus.global_bydirection("left")
-	end),
-	awful.key({ modkey }, "j", function()
-		awful.client.focus.global_bydirection("down")
-	end),
-	awful.key({ modkey }, "k", function()
-		awful.client.focus.global_bydirection("up")
-	end),
-	awful.key({ modkey }, "l", function()
-		awful.client.focus.global_bydirection("right")
-	end),
+	-- awful.key({ modkey }, "h", function()
+	-- 	awful.client.focus.global_bydirection("left")
+	-- end),
+	-- awful.key({ modkey }, "j", function()
+	-- 	awful.client.focus.global_bydirection("down")
+	-- end),
+	-- awful.key({ modkey }, "k", function()
+	-- 	awful.client.focus.global_bydirection("up")
+	-- end),
+	-- awful.key({ modkey }, "l", function()
+	-- 	awful.client.focus.global_bydirection("right")
+	-- end),
 
 	-- swap by direction
 	awful.key({ modkey, "Shift" }, "h", function()
