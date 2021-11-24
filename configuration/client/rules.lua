@@ -136,10 +136,10 @@ ruled.client.connect_signal("request::rules", function()
 			},
 		},
 		properties = {
-			tag = "1",
-			switch_to_tags = true,
+			-- tag = "1",
+			-- switch_to_tags = true,
 			size_hints_honor = false,
-			titlebars_enabled = true,
+			titlebars_enabled = false,
 		},
 	})
 
@@ -176,24 +176,6 @@ ruled.client.connect_signal("request::rules", function()
 		},
 		properties = {
 			tag = "3",
-			switch_to_tags = true,
-		},
-	})
-
-	ruled.client.append_rule({
-		id = "line",
-		rule_any = {
-			instance = {
-				"ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html",
-			},
-			class = {
-				"ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html",
-			},
-		},
-		properties = {
-			tag = "9",
-			floating = false,
-			ontop = false,
 			switch_to_tags = true,
 		},
 	})
@@ -307,11 +289,13 @@ ruled.client.connect_signal("request::rules", function()
 	ruled.client.append_rule({
 		id = "sandbox",
 		rule_any = {
+			instance = { "zoom" },
 			class = {
 				"VirtualBox Manage",
 				"VirtualBox Machine",
 				"Gnome-boxes",
 				"Virt-manager",
+				"zoom"
 			},
 		},
 		properties = {
@@ -391,6 +375,25 @@ ruled.client.connect_signal("request::rules", function()
 			placement = awful.placement.centered,
 		},
 	})
+
+	ruled.client.append_rule({
+		id = "line",
+		rule_any = {
+			instance = {
+				"ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html",
+			},
+			class = {
+				"ophjlpahpchlmihnnnihgmmeilfjmjjc__index.html",
+			},
+		},
+		properties = {
+			tag = "9",
+			floating = false,
+			ontop = false,
+			switch_to_tags = true,
+		},
+	})
+
 end)
 
 -- Normally we'd do this with a rule, but some program like spotify doesn't set its class or name
